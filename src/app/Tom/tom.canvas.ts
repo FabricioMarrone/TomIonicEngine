@@ -40,42 +40,9 @@ export class TomCanvasComp {
         this._CANVAS.width = window.innerWidth;
         this._CANVAS.height = window.innerHeight;
 
+        this._CONTEXT = this._CANVAS.getContext("2d");
+        
         this.posX = 250;
-
-        if(this._CANVAS.getContext)
-        {
-            this.setupCanvas();
-            //this.fullscreen();
-        }
-
-        //this.drawCircle();
-        this.requestLoop();
-    }
-
-    setupCanvas()
-    {
-        this._CONTEXT = this._CANVAS.getContext('2d');
-        this._CONTEXT.fillStyle = "#3e3e3e";
-        this._CONTEXT.fillRect(0, 0, this._CANVAS.width, this._CANVAS.height);
-    }
-
-    clearCanvas()
-    {
-        this._CONTEXT.clearRect(0, 0, this._CANVAS.width, this._CANVAS.height);
-        this.setupCanvas();
-    }
-
-    drawCircle()
-    {
-        this.clearCanvas();
-        this._CONTEXT.beginPath();
-
-        // x, y, radius, startAngle, endAngle
-        //this._CONTEXT.arc(this._CANVAS.width/2 + this.posX, this._CANVAS.height/2, 80, 0, 2 * Math.PI);
-        this._CONTEXT.arc(this.lastX, this.lastY, 80, 0, 2 * Math.PI);
-        this._CONTEXT.lineWidth = 1;
-        this._CONTEXT.strokeStyle = '#ffffff';
-        this._CONTEXT.stroke();
     }
 
     handleClick(ev){
@@ -86,13 +53,23 @@ export class TomCanvasComp {
         //Layer gets the coords relatives to the canvas element
         this.lastX = ev.layerX;
         this.lastY = ev.layerY;
-
-        this.drawCircle();
     }
 
     mouseMove(ev){
         this.currentX = ev.layerX;
         this.currentY = ev.layerY;
+    }
+
+    getContext(): any{
+        return this._CONTEXT;
+    }
+
+    getWidth(): number{
+        return this._CANVAS.width;
+    }
+
+    getHeight(): number{
+        return this._CANVAS.height;
     }
 
     // fullscreen(){
@@ -103,14 +80,4 @@ export class TomCanvasComp {
     //         this._CANVAS.mozRequestFullScreen();
     //     }          
     // }
-
-    requestLoop(){
-
-        // this.posX += 1;
-        // if(this.posX > 400) this.posX = 0;
-        
-        // this.drawCircle();
-
-        requestAnimationFrame(() => { this.requestLoop(); });
-    }
 }

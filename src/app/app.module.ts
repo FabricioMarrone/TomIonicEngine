@@ -9,7 +9,7 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GameComp } from '../pages/game/game.comp';
-import { TomCanvasComp } from './Tom.Canvas/tom.canvas';
+import { TomCanvasComp } from './Tom/tom.canvas';
 
 @NgModule({
   declarations: [
