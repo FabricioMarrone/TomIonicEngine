@@ -1,5 +1,6 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { UserClickInfo } from './tom.input';
 
 @Component({
     selector: "tom-canvas",
@@ -12,10 +13,11 @@ export class TomCanvasComp {
      */
     @ViewChild('canvas') canvasEl : ElementRef;
 
+    @Output() userClick: EventEmitter<UserClickInfo> = new EventEmitter();
+
     private _CANVAS  : any;
     private _CONTEXT : any;
     
-    private posX: number;
     lastX: number;
     lastY: number;
 
@@ -41,18 +43,19 @@ export class TomCanvasComp {
         this._CANVAS.height = window.innerHeight;
 
         this._CONTEXT = this._CANVAS.getContext("2d");
-        
-        this.posX = 250;
     }
 
     handleClick(ev){
- 
-        //this.lastX = ev.touches[0].pageX;
-        //this.lastY = ev.touches[0].pageY;
         
         //Layer gets the coords relatives to the canvas element
         this.lastX = ev.layerX;
         this.lastY = ev.layerY;
+
+        this.userClick.emit({
+            event: ev, 
+            x: ev.layerX, 
+            y: ev.layerY
+        });
     }
 
     mouseMove(ev){

@@ -2,6 +2,7 @@
 //import { SimpleInputManager } from "./Tom.Input";
 import { Simple2DRender } from "./Tom.Render";
 import { TomCanvasComp } from "./tom.canvas";
+import { SimpleInputManager } from "./tom.input";
 //import { FPSMeter } from "./Tom.FPSMeter";
 //import { SimpleAudio, MusicData, SoundData, AudioFX } from "./Tom.Audio";
 //import { AssetManager } from "./Tom.Assets";
@@ -9,6 +10,7 @@ import { TomCanvasComp } from "./tom.canvas";
 export class TomGame {
     title: string;
     canvas: TomCanvasComp;
+    input: SimpleInputManager;
     render: Simple2DRender;
     states: Array<GameState>;
     private currentStateId: number = 0;
@@ -18,7 +20,6 @@ export class TomGame {
     delta: number;
     maxDelta: number = 1 / 60;
 
-    // public input: SimpleInputManager;
     // public audio: SimpleAudio;
     // public assets: AssetManager;
 
@@ -41,9 +42,9 @@ export class TomGame {
         // }
 
         this.render = new Simple2DRender(this.canvas);
-
+        
         //Initialize input
-        //this.input = new SimpleInputManager();
+        this.input = new SimpleInputManager();
 
         //Initialize audio
         //this.audio = new SimpleAudio();

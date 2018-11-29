@@ -3,25 +3,31 @@ import { Rectangle } from "../../../app/Tom/Tom.Entities";
 import { Simple2DRender } from "../../../app/Tom/Tom.Render";
 import { GameMath } from "../../../app/Tom/Tom.Math";
 import { Screens } from "./screens";
+import { UserClickInfo } from "../../../app/Tom/tom.input";
 
 export class GrayCircleScreen extends GameState {
 
-    btnEmpezarPosX: number;
-    btnEmpezarPosY: number;
-    btnEmpezarArea: Rectangle;
+    private circleRenderPosX: number;
+    private circleRenderPosY: number;
 
     constructor() {
         super();
     }
 
     init(): void {
-        this.btnEmpezarPosX = 100;
-        this.btnEmpezarPosY = 350;
-        this.btnEmpezarArea = new Rectangle(this.btnEmpezarPosX, this.btnEmpezarPosY, 135, 35);
+        this.circleRenderPosX = 100;
+        this.circleRenderPosY = 100;
     }
 
     update(delta: number): void {
 
+        if(this.game.input.screenClicked){
+            let click: UserClickInfo = this.game.input.lastClick;
+            if(click){
+                this.circleRenderPosX = click.x;
+                this.circleRenderPosY = click.y;
+            }
+        }
         // let click: MouseClick = this.game.input.MouseTouched();
         // if (click) {
         //     if (GameMath.Contains(this.btnEmpezarArea, click.x, click.y)) {
@@ -36,7 +42,7 @@ export class GrayCircleScreen extends GameState {
 
         render.drawText(50, 50, "GrayCircleScreen!! :)");
         
-        render.drawCircle(200, 200, 80, "#ffffff", 1);
+        render.drawCircle(this.circleRenderPosX, this.circleRenderPosY, 80, "#ffffff", 1);
 
     }
 
