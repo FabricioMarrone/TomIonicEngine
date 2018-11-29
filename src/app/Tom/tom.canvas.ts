@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { UserClickInfo } from './tom.input';
+import { UserTouchInfo } from './tom.input';
 
 @Component({
     selector: "tom-canvas",
@@ -13,7 +13,7 @@ export class TomCanvasComp {
      */
     @ViewChild('canvas') canvasEl : ElementRef;
 
-    @Output() userClick: EventEmitter<UserClickInfo> = new EventEmitter();
+    @Output() userTouch: EventEmitter<UserTouchInfo> = new EventEmitter();
 
     private _CANVAS  : any;
     private _CONTEXT : any;
@@ -45,17 +45,17 @@ export class TomCanvasComp {
         this._CONTEXT = this._CANVAS.getContext("2d");
     }
 
-    // handleClick(ev) : void {
-    //     //Layer gets the coords relatives to the canvas element
-    //     this.lastX = ev.layerX;
-    //     this.lastY = ev.layerY;
+    handleClick(ev) : void {
+        //Layer gets the coords relatives to the canvas element
+        this.lastX = ev.layerX;
+        this.lastY = ev.layerY;
 
-    //     this.userClick.emit({
-    //         event: ev, 
-    //         x: ev.layerX, 
-    //         y: ev.layerY
-    //     });
-    // }
+        this.userTouch.emit({
+            event: ev, 
+            x: ev.layerX, 
+            y: ev.layerY
+        });
+    }
 
     handleTouch(ev) : void {
         ev.preventDefault();
@@ -66,7 +66,7 @@ export class TomCanvasComp {
         this.lastX = touch.clientX - canvasCoords.left;
         this.lastY = touch.clientY - canvasCoords.top;
 
-        this.userClick.emit({
+        this.userTouch.emit({
             event: ev, 
             x: touch.clientX - canvasCoords.left, 
             y: touch.clientY - canvasCoords.top

@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { TomCanvasComp } from '../../app/Tom/tom.canvas';
 import { TomGame } from '../../app/Tom/Tom.Game';
 import { GrayCircleScreen } from './screens/grayCircle.screen';
-import { UserClickInfo } from '../../app/Tom/tom.input';
+import { UserTouchInfo } from '../../app/Tom/tom.input';
 
 @Component({
   selector: 'page-game',
@@ -28,7 +28,7 @@ export class GameComp {
     this.game.start();
   }
 
-  handleUserClick(userClickEvent: UserClickInfo): void {
-    this.game.input.onUserClick(userClickEvent);
+  handleUserTouch(userTouch: UserTouchInfo): void {
+    this.game.input.onUserTouch(userTouch);
   }
 }

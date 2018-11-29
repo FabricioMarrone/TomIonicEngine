@@ -3,7 +3,7 @@ import { Rectangle } from "../../../app/Tom/Tom.Entities";
 import { Simple2DRender } from "../../../app/Tom/Tom.Render";
 import { GameMath } from "../../../app/Tom/Tom.Math";
 import { Screens } from "./screens";
-import { UserClickInfo } from "../../../app/Tom/tom.input";
+import { UserTouchInfo } from "../../../app/Tom/tom.input";
 
 export class GrayCircleScreen extends GameState {
 
@@ -21,11 +21,11 @@ export class GrayCircleScreen extends GameState {
 
     update(delta: number): void {
 
-        if(this.game.input.screenClicked){
-            let click: UserClickInfo = this.game.input.lastClick;
-            if(click){
-                this.circleRenderPosX = click.x;
-                this.circleRenderPosY = click.y;
+        if(this.game.input.screenTouched){
+            let touch: UserTouchInfo = this.game.input.lastTouch;
+            if(touch){
+                this.circleRenderPosX = touch.x;
+                this.circleRenderPosY = touch.y;
             }
         }
         // let click: MouseClick = this.game.input.MouseTouched();

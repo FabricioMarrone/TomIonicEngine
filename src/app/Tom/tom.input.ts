@@ -1,4 +1,4 @@
-export class UserClickInfo {
+export class UserTouchInfo {
     event: any;
     x: number;
     y: number;
@@ -6,21 +6,25 @@ export class UserClickInfo {
 
 export class SimpleInputManager{
 
-    private clicks: Array<UserClickInfo>;
+    private touchs: Array<UserTouchInfo>;
 
     constructor(){
-        this.clicks = new Array<UserClickInfo>();
+        this.touchs = new Array<UserTouchInfo>();
     }
 
-    onUserClick(userClick: UserClickInfo) : void {
-        this.clicks.push(userClick);
+    onUserTouch(userTouch: UserTouchInfo) : void {
+        this.touchs.push(userTouch);
     }
 
-    get screenClicked(): boolean{
-        return this.clicks.length > 0;
+    get screenTouched(): boolean{
+        return this.touchs.length > 0;
     }
 
-    get lastClick(): UserClickInfo{
-        return this.screenClicked ? this.clicks.pop() : null;
+    get lastTouch(): UserTouchInfo{
+        return this.screenTouched ? this.touchs.pop() : null;
+    }
+
+    get Touchs(): Array<UserTouchInfo>{
+        return this.touchs;
     }
 }
