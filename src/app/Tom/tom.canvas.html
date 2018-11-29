@@ -1,3 +1,7 @@
 <div class="ion-canvas">
-    <canvas #canvas (mousedown)="handleClick($event)" (mousemove)="mouseMove($event)"></canvas>
+    <canvas #canvas 
+        (touchstart)="handleTouch($event)"
+    ></canvas>
+    <!-- (mousedown)="handleClick($event)"  -->
+    <!-- (mousemove)="mouseMove($event)" -->
 </div>

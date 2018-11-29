@@ -45,17 +45,34 @@ export class TomCanvasComp {
         this._CONTEXT = this._CANVAS.getContext("2d");
     }
 
-    handleClick(ev){
-        
-        //Layer gets the coords relatives to the canvas element
-        this.lastX = ev.layerX;
-        this.lastY = ev.layerY;
+    // handleClick(ev) : void {
+    //     //Layer gets the coords relatives to the canvas element
+    //     this.lastX = ev.layerX;
+    //     this.lastY = ev.layerY;
+
+    //     this.userClick.emit({
+    //         event: ev, 
+    //         x: ev.layerX, 
+    //         y: ev.layerY
+    //     });
+    // }
+
+    handleTouch(ev) : void {
+        ev.preventDefault();
+
+        let canvasCoords: any = ev.target.getBoundingClientRect();
+
+        let touch = ev.touches[0];
+        this.lastX = touch.clientX - canvasCoords.left;
+        this.lastY = touch.clientY - canvasCoords.top;
 
         this.userClick.emit({
             event: ev, 
-            x: ev.layerX, 
-            y: ev.layerY
+            x: touch.clientX - canvasCoords.left, 
+            y: touch.clientY - canvasCoords.top
         });
+
+        //this.handleClick(ev);
     }
 
     mouseMove(ev){
